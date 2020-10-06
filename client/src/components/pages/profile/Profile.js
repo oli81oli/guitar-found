@@ -19,7 +19,6 @@ class Profile extends Component {
             email: this.props.loggedIn.email,
             phone: this.props.loggedIn.phone,
 
-
             showModal: false
         }
 
@@ -44,23 +43,22 @@ class Profile extends Component {
             <>
                 <div className='profile'>
                     <h2>Hola! {this.state.name}
-                        {/* <Link to='/update'> */}
                         <Button onClick={() => this.handleModal(true)} className='config-btn' size="sm" variant="light" >Actualizar Datos</Button >
-                        {/* </Link> */}
                     </h2>
+
                     <div className='flexBox'>
-                        <p>oliiiiiii{this.state.username}</p>
                         <p>jhjkhjkhkj{this.state.email}</p>
+                        <p>oliiiiiii{this.state.username}</p>
                         <p>{this.state.phone}</p>
                     </div>
                     <hr />
-
                 </div>
+
                 <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Actualizar datos</Modal.Title>
+                        <Modal.Title >Actualizar datos</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body style={{backgroundColor:'black'}}>
                         <UpdateUserForm loggedIn={this.props.loggedIn} closeModal={this.handleUser} />
                     </Modal.Body>
                 </Modal>

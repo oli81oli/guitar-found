@@ -41,28 +41,28 @@ class UpdateUserForm extends Component {
 
         return (
 
-            <Form onSubmit={this.handleFormSubmit}>
+            <Form  onSubmit={this.handleFormSubmit}>
                 <Form.Group>
-                    <Form.Label>Nombre</Form.Label>
+                    <Form.Label style={{color:'white'}}>Nombre</Form.Label>
                     <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Nombre de Usuario</Form.Label>
+                    <Form.Label style={{color:'white'}}>Nombre de Usuario</Form.Label>
                     <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={{color:'white'}}>Email</Form.Label>
                     <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label>Telefono</Form.Label>
+                    <Form.Label style={{color:'white'}}>Telefono</Form.Label>
                     <Form.Control type="number" name="phone" value={this.state.phone} onChange={this.handleInputChange} />
                 </Form.Group>
 
-                <Button variant="dark" type="submit">Actualizar datos</Button>
+                <Button style={{marginTop:'20px'}} variant="light" type="submit">Actualizar datos</Button>
             </Form>
         )
     }

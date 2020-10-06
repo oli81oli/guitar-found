@@ -46,16 +46,16 @@ class Login extends Component {
 
                         <Form.Group >
                             <Form.Label>Nombre de Usuario</Form.Label>
-                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder='Indica tu Usuario'/>
                         </Form.Group>
 
                         <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder='Indica tu Contraseña'/>
                         </Form.Group>
 
 
-                        <Button variant="outline-light" size="sm" type="submit">Entrar</Button>
+                        <Button  style={{marginTop:'20px'}}variant="light" size="sm" type="submit">Entrar</Button>
                     </Form>
                 </section>
             </>

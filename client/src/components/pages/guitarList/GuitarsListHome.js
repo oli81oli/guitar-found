@@ -52,7 +52,7 @@ class GuitarsListHome extends Component {
                         </Col>)
                     : <Spinner animation="border" />}
 
-                <Button className='center-btn' onClick={this.props.hideGuitars} variant="outline-light" size="sm">Cerrar </Button>
+                <Button className='center-btn' onClick={this.props.hideGuitars} variant="light" size="sm">Cerrar </Button>
 
 
             </>
