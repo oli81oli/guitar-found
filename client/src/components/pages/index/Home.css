@@ -1,0 +1,30 @@
+#main-page h1 {
+  color: white;
+  font-weight: 700;
+  font-size: 3.2em;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+#main-page p {
+  color: rgb(192, 192, 192);
+}
+#main-page div {
+  text-align: center;
+}
+.image {
+  display: block;
+  width: 70%;
+  height: 10em;
+  object-fit: cover;
+  margin: 1em auto;
+  
+}
+
+@media (max-width: 360px) {
+  #main-page h1 {
+    font-size: 2.4em;
+    font-weight: 400;
+  }
+}

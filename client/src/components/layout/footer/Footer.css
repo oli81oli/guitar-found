@@ -1,0 +1,12 @@
+footer {
+  font-size: 0.6em;
+  color: rgb(165, 162, 162);
+  padding: 5px 0;
+  position: fixed;
+  bottom: 0;
+  margin-left:4em
+}
+
+footer p {
+  margin: 0;
+}
