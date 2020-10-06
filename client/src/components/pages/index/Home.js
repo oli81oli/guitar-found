@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
 
 import GuitarListHome from '../guitarList/GuitarsListHome'
 import Row from 'react-bootstrap/Row'
-
 
 import Button from 'react-bootstrap/Button'
 import './Home.css'
@@ -26,13 +24,13 @@ class Home extends Component {
         return (
             <main id='main-page' >
                 <h1>GuitarFound</h1>
-                {/* <Link to="/guitars"> */}
+               
                 <div>
                     {/* <img className='image'src={image1} alt='guitars' /> */}
                     < Button onClick={() => this.setState({ showGuitar: true })} size="sm" variant="light" style={{ marginTop: '20px' }}> Muestra algunas guitarras</Button >
                     {this.state.showGuitar ? this.showGuitars() : null}
                 </div >
-                {/* </Link> */}
+              
             </main >
         )
     }
