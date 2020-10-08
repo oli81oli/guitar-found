@@ -11,14 +11,13 @@ import logo from './logo.png'
 import authUserService from '../../../service/auth.userService'
 
 
-
-
 class NavBar extends Component {
     constructor(props) {
         super(props)
 
         this.authUserService = new authUserService()
     }
+
     logout = () => {
         this.authUserService
             .logout()
@@ -26,12 +25,14 @@ class NavBar extends Component {
             .catch(err => console.log(err))
     }
 
+
+
     render() {
 
         return (
             <>
                 <nav>
-                    <Navbar variant="dark" expand="md" style={{ marginBottom: '40px' }}>
+                    <Navbar variant="dark" expand="md" style={{ marginBottom: 40 }}>
 
                         <Link to="/">
                             <Navbar.Brand>
@@ -55,11 +56,8 @@ class NavBar extends Component {
                                     <Button className="nav-btn" variant="outline-light" size="sm">Iniciar Sesion</Button>
                                 </Link>
                                 <Link to="/">
-                                {this.props.loggedIn ? <Button onClick={this.logout} className="nav-btn" variant="outline-light" size="sm">Cerrar Sesion</Button> : null}
+                                    {this.props.loggedIn ? <Button onClick={this.logout} className="nav-btn" variant="outline-light" size="sm">Cerrar Sesion</Button> : null}
                                 </Link>
-
-
-
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>

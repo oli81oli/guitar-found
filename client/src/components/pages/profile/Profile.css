@@ -18,10 +18,23 @@
   font-size: 1.4em;
   margin-top: -5px;
 }
-.config-btn{
-    margin-top: -5px;
-    margin-left: 40px;
+.config-btn {
+  margin-top: -5px;
+  margin-left: 20px;
 }
+.config-btn-center {
+  width: 20%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 4em;
+}
+.config-modal-newGuitar {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+ 
+}
+
 
 @media (max-width: 1000px) {
   .profile h2 {
@@ -29,8 +42,22 @@
     margin-top: -1.5em;
   }
   .flexBox p {
-
-    font-size:.9em;
+    font-size: 0.9em;
     margin-top: -5px;
+  }
+}
+@media (max-width: 1440px) {
+  .config-btn-center {
+    width: 40%;
+  }
+}
+@media (max-width: 800px) {
+  .config-btn-center {
+    width: 60%;
+  }
+}
+@media (max-width: 540px) {
+  .config-btn-center {
+    width: 80%;
   }
 }

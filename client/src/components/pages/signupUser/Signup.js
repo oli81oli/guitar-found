@@ -71,9 +71,10 @@ class Signup extends Component {
                             <Form.Label >Telefono</Form.Label>
                             <Form.Control type="number" name="phone" value={this.state.phone} onChange={this.handleInputChange}placeholder='Indica tu nº de telefono' />
                         </Form.Group>
-                        <p style={{color:'red'}}>{this.state.message}
-                        </p>
-                        <Button  style={{marginTop:'20px'}}variant="light" size="sm" type="submit">Registrar</Button>
+
+                        <p style={{color:'red'}}>{this.state.message}</p>
+                        
+                        <Button  style={{marginTop:20}}variant="light" size="sm" type="submit">Registrar</Button>
                     </Form>
                 </section>
             </>

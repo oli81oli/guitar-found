@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 
-// import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
@@ -9,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import './GuitarsListHome.css'
 
 import guitarService from '../../../service/guitar.service'
+
 
 
 class GuitarsListHome extends Component {
@@ -21,8 +21,10 @@ class GuitarsListHome extends Component {
         this.guitarService = new guitarService()
     }
 
+
     componentDidMount = () => this.loadGuitars()
 
+    
     loadGuitars = () => {
         this.guitarService
             .getAllGuitars()

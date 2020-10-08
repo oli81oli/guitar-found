@@ -7,7 +7,9 @@ import './Login.css'
 
 import authUserService from '../../../service/auth.userService'
 
+
 class Login extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -18,10 +20,12 @@ class Login extends Component {
         this.authUserService = new authUserService()
     }
 
+
     handleInputChange = e => {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
+    
 
     handleFormSubmit = e => {
         e.preventDefault()
@@ -55,7 +59,7 @@ class Login extends Component {
                         </Form.Group>
 
 
-                        <Button  style={{marginTop:'20px'}}variant="light" size="sm" type="submit">Entrar</Button>
+                        <Button  style={{marginTop:20}}variant="light" size="sm" type="submit">Entrar</Button>
                     </Form>
                 </section>
             </>

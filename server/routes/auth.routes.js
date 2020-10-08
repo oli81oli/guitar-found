@@ -20,7 +20,7 @@ router.post('/signup', (req, res) => {
         res.status(400).json({ message: 'Empty fields' });
         return
     }
-    //change weak password ojooooo
+    //change weak password ojooooo//////////////
     if (password.length < 2) {
         res.status(400).json({ message: 'Weak password' });
         return
@@ -117,7 +117,7 @@ router.post('/login', (req, res, next) => {
 //LOGOUT
 
 router.post('/logout', (req, res) => {
-    // req.logout() is defined by passport
+   
     req.logout();
     res.status(200).json({ message: 'Log out success!' })
 });
@@ -143,8 +143,6 @@ router.get('/loggedin', (req, res) => {
 
 router.put('/update-user/:user_id', (req, res) => {
 
-    // const id = req.params.user_id
-    // const { name, username, email, phone } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
         res.status(400).json({ message: 'Specified id is not valid' })
@@ -163,9 +161,7 @@ router.put('/update-user/:user_id', (req, res) => {
 
 router.get('/delete-user/:user_id', (req, res) => {
 
-    // const id = req.params.user_id
-
-    User.findByIdAndDelete(req.params.user_id)
+       User.findByIdAndDelete(req.params.user_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

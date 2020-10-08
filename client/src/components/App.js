@@ -7,6 +7,8 @@ import NavBar from './layout/navbar/NavBar'
 import Signup from './pages/signupUser/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
+import GuitarListUser from './pages/guitarListUser/GuitarListUser'
+import GuitarDetails from './pages/guitarDetails/GuitarDetails'
 
 
 import './App.css'
@@ -39,7 +41,6 @@ class App extends Component {
       .catch(err => this.setState({ loggedIn: null }))
   }
 
-
   render() {
 
     return (
@@ -47,12 +48,13 @@ class App extends Component {
         <NavBar loggedIn={this.state.loggedIn} takeUser={this.takeUser} />
         <Switch>
           <Route path="/" exact render={() => <Home />} />
+          <Route path="/home" exact render={() => <Home />} />
           <Route path="/signup" render={props => <Signup takeUser={this.takeUser} {...props} />} />
           <Route path="/login" render={props => <Login takeUser={this.takeUser} {...props} />} />
-          <Route path="/profile" exact render={() => this.state.loggedIn ? <Profile takeUser={this.takeUser} loggedIn={this.state.loggedIn} /> : null} />
+          <Route path="/profile" exact render={props => this.state.loggedIn ? <Profile takeUser={this.takeUser} loggedIn={this.state.loggedIn} {...props} /> : null} />
           {/* Redirect arriba */}
-          <Route />
-          <Route />
+          <Route path="/profile/guitars" exact render={() => this.state.loggedIn ? <GuitarListUser loggedIn={this.state.loggedIn} /> : null} />
+          <Route path="/profile/guitars/details/:_id" render={props => this.state.loggedIn ? <GuitarDetails loggedIn={this.state.loggedIn} {...props} /> : null} />
           <Route />
           <Route />
 

@@ -18,10 +18,12 @@ class UpdateUserForm extends Component {
 
     }
 
+
     handleInputChange = e => {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
+    
 
     handleFormSubmit = e => {
         e.preventDefault()
@@ -62,7 +64,7 @@ class UpdateUserForm extends Component {
                     <Form.Control type="number" name="phone" value={this.state.phone} onChange={this.handleInputChange} />
                 </Form.Group>
 
-                <Button style={{marginTop:'20px'}} variant="light" type="submit">Actualizar datos</Button>
+                <Button style={{marginTop:20}} variant="light" type="submit">Actualizar datos</Button>
             </Form>
         )
     }

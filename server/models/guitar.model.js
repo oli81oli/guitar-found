@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const guitarSchema = new Schema({
+   
     name: String,
     model: String,
     image: {
@@ -11,7 +12,7 @@ const guitarSchema = new Schema({
     state: {
         type: String,
         enum: ['nueva', 'casi nueva', 'restaurada', 'mas de 7 años', 'otro'],
-        lowercase: false
+        lowercase: true
     },
     price: {
         type: Number,
@@ -19,7 +20,7 @@ const guitarSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
-        rel: 'User'
+        ref: 'User'
     }
 }, {
     timestamps: true

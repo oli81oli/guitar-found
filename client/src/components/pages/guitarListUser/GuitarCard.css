@@ -1,0 +1,29 @@
+.guitar-card {
+  margin: 1em auto;
+  width: 70%;
+}
+
+.guitar-card img {
+  margin-top: 1em;
+  height: 600px;
+  object-fit: cover;
+}
+.text-card{
+  
+  border-radius:3px;
+  padding:10px;
+  background-color: rgb(221, 221, 221);
+  margin-bottom: 10px;
+}
+.btn-black {
+  display: block;
+  margin: 0 auto;
+  background-color: black;
+  color: white;
+  width: 60%;
+  text-align: center;
+}
+.btn-black:hover{
+  color:white;
+  text-decoration: underline;
+}
