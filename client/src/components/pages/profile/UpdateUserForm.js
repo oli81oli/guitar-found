@@ -30,9 +30,7 @@ class UpdateUserForm extends Component {
 
         this.authUserService
             .updateUser(this.props.loggedIn._id, this.state)
-            .then(response => {
-                this.props.closeModal(response.data)
-            })
+            .then(response => this.props.closeModal(response.data))
             .catch(err => console.log('Erroro!!', { err }))
     }
 

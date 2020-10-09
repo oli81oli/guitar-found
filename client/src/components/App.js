@@ -51,10 +51,10 @@ class App extends Component {
           <Route path="/home" exact render={() => <Home />} />
           <Route path="/signup" render={props => <Signup takeUser={this.takeUser} {...props} />} />
           <Route path="/login" render={props => <Login takeUser={this.takeUser} {...props} />} />
-          <Route path="/profile" exact render={props => this.state.loggedIn ? <Profile takeUser={this.takeUser} loggedIn={this.state.loggedIn} {...props} /> : null} />
+          <Route path="/profile" exact render={props => this.state.loggedIn ? <Profile takeUser={this.takeUser} loggedIn={this.state.loggedIn} {...props} /> : <Redirect to="/login" />} />
           {/* Redirect arriba */}
-          <Route path="/profile/guitars" exact render={() => this.state.loggedIn ? <GuitarListUser loggedIn={this.state.loggedIn} /> : null} />
-          <Route path="/profile/guitars/details/:_id" render={props => this.state.loggedIn ? <GuitarDetails loggedIn={this.state.loggedIn} {...props} /> : null} />
+          <Route path="/profile/guitars" exact render={() => this.state.loggedIn ? <GuitarListUser loggedIn={this.state.loggedIn} /> : <Redirect to="/login" />} />
+          <Route path="/profile/guitars/details/:_id" render={props => this.state.loggedIn ? <GuitarDetails loggedIn={this.state.loggedIn} {...props} /> : <Redirect to="/login" />} />
           <Route />
           <Route />
 

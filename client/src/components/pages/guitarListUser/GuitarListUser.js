@@ -22,9 +22,15 @@ class GuitarListUser extends Component {
         this.state = {
             guitars: [],
 
+            priceFilter: 0,
+
+
         }
         this.guitarService = new guitarService()
     }
+
+
+
 
 
     componentDidMount = () => this.loadGuitars()
@@ -33,11 +39,24 @@ class GuitarListUser extends Component {
     loadGuitars = () => {
         this.guitarService
             .getAllGuitars()
-            .then(response => this.setState({ guitars: response.data })
-            )
-            .catch(err => console.log('Error:', err))
+            .then(response => this.setState({ guitars: response.data }))
+            .catch(err => console.log('------', err))
     }
 
+    priceFilter = () => {
+        
+        this.setState({guitars:this.state.guitars.filter(guitar => guitar.price <= this.state.priceFilter)})  
+       
+        
+    }
+
+    handleInputChange = e => {
+        const { name, value } = e.target
+
+        if (name === "priceFilter") this.setState({ [name]: value })
+
+
+    }
 
 
     render() {
@@ -46,13 +65,29 @@ class GuitarListUser extends Component {
             <>
                 <Form.Group>
                     <Form.Label>Precio</Form.Label>
-                    <Form.Control as="select" size="lg">
-                        <option>Menos de 500$</option>
-                        <option>Menos de 1000$</option>
+                    <Form.Control as="select" size="lg"  name="priceFilter" onChange={this.handleInputChange}>
+
+                        <option value='250'>
+                            Menos de 250 $
+                        </option>
+                        <option value='450'>
+                            Menos de  450 $
+                        </option>
+                        <option value='550'>
+                            Menos de  550 $
+                        </option>
+                        <option value='750'>
+                            Menos de  750 $
+                        </option>
+                        <option value='1000'>
+                            Menos de  1000 $
+                        </option>
+
+
                     </Form.Control>
                 </Form.Group>
 
-                <Button style={{ marginLeft: '5%' }} variant="light" size="sm">Buscar</Button>
+                <Button onClick={() => this.priceFilter()} style={{ marginLeft: '5%' }} variant="light" size="sm">Buscar</Button>
 
 
 
@@ -76,4 +111,3 @@ class GuitarListUser extends Component {
 }
 
 export default GuitarListUser
-
