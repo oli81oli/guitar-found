@@ -9,7 +9,7 @@ import filesService from '../../../service/files.service'
 
 
 class UpdateGuitarForm extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
@@ -19,7 +19,10 @@ class UpdateGuitarForm extends Component {
                 state: this.props.guitarData.state,
                 price: this.props.guitarData.price,
                 image: this.props.guitarData.image
-            }
+            },
+            message: '',
+            uploadingImage: false
+
         }
         this.guitarService = new guitarService()
         this.filesService = new filesService()
@@ -41,11 +44,14 @@ class UpdateGuitarForm extends Component {
         this.guitarService
             .editGuitar(this.props.guitarData._id, this.state.guitar)
             .then(response => this.props.handleGuitar(response.data))
-            .catch(err => console.log('Erroro!!', { err }))
+            .catch(err => this.setState({ message: err.request.response }))
     }
 
 
     handleImageUpload = e => {
+
+        this.setState({ uploadingImage: true })
+
 
         const uploadData = new FormData()
         uploadData.append('image', e.target.files[0])
@@ -53,8 +59,13 @@ class UpdateGuitarForm extends Component {
         this.filesService
             .uploadImage(uploadData)
             .then(response => {
-                this.setState({ guitar: { ...this.state.guitar, image: response.data.secure_url } })
+                this.setState({
+                    guitar: { ...this.state.guitar, image: response.data.secure_url },
+                    uploadingImage: null
+                })
             })
+            .catch(err => console.log(err))
+
     }
 
 
@@ -88,10 +99,12 @@ class UpdateGuitarForm extends Component {
 
                 <Form.Group >
                     <Form.Label style={{ color: 'white' }}>Foto</Form.Label>
-                    <Form.Control style={{ backgroundColor: 'white', borderRadius: 5 }} type="file" name="image" onChange={this.handleImageUpload}  />
+                    <Form.Control style={{ backgroundColor: 'white', borderRadius: 5 }} type="file" name="image" onChange={this.handleImageUpload} />
                 </Form.Group>
 
-                <Button style={{ marginTop: 20 }} variant="light" type="submit">Actualizar guitarra</Button>
+                <p style={{ color: 'red' }}>{this.state.message}</p>
+
+                <Button style={{ marginTop: 20 }} variant="light" type="submit" disabled={this.state.uploadingImage}>{this.state.uploadingImage ? 'Subiendo Imagen...' : 'Actualizar Guitarra'}</Button>
             </Form>
         )
     }

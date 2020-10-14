@@ -10,8 +10,12 @@ import Modal from 'react-bootstrap/Modal'
 import './GuitarDetails.css'
 
 import UpdateGuitarForm from '../updateGuitar/UpdateGuitarForm'
+import Message from '../../shared/Message'
+
 
 import guitarService from './../../../service/guitar.service'
+import authUserService from './../../../service/auth.userService'
+
 
 
 
@@ -22,9 +26,11 @@ class GuitarDetails extends Component {
         this.state = {
             owner: {},
 
-            showModal: false
+            showModal: false,
+            showToastGuitar: false
         }
         this.guitarService = new guitarService()
+        this.authUserService = new authUserService()
     }
 
 
@@ -45,6 +51,19 @@ class GuitarDetails extends Component {
             .catch(err => console.log(err))
     }
 
+    addFavourites = e => {
+
+        e.preventDefault()
+
+        const guitar = { user: this.props.loggedIn._id, guitar: this.state._id }
+        this.authUserService
+            .addFavouritesUser(guitar)
+            .then(() => this.props.history.push('/profile'))
+            .catch(err => console.log(err))
+
+
+    }
+
 
     handleGuitar = updatedGuitar => {
         this.setState({
@@ -53,16 +72,21 @@ class GuitarDetails extends Component {
             model: updatedGuitar.model,
             state: updatedGuitar.state,
             price: updatedGuitar.price,
-            image: updatedGuitar.image
+            image: updatedGuitar.image,
+            showToastGuitar: null
         })
         this.handleModalGuitar(false)
+
 
 
     }
 
 
-    handleModalGuitar = () => this.handleModal(false)
-    handleModal = showModal => this.setState({ showModal })
+    handleModalGuitar = () => {
+        this.setState({ showToastGuitar: null })
+        this.handleModal(false)
+    }
+    handleModal = showModal => this.setState({ showModal, showToastGuitar: true })
 
 
 
@@ -72,28 +96,30 @@ class GuitarDetails extends Component {
         return (
             <Container>
                 <main id='details'>
-                    <Link to="/profile/guitars" >
-                        <Button style={{ marginBottom: '5% ' }} variant="light" size="sm">Volver</Button>
+                    <Link to="/profile/" >
+                        <Button style={{ marginBottom: '5% ' }} variant="light" size="sm">Volver al Perfil</Button>
 
                     </Link>
                     <h1 className='h1'>{this.state.name} {this.state.model}</h1>
-                    <hr style={{border:'1px solid white'}}/>
+                    <hr style={{ border: '1px solid white' }} />
+                    <Button onClick={this.addFavourites}
+                        variant="light" size="sm">Añadir a Favoritos</Button>
                     <Row>
                         <Col md={4}>
 
-                            <h2 >Propietario: {this.state.owner.name}</h2>
+                            <h2 className='owner'>Propietario: {this.state.owner && this.state.owner.name}</h2>
                             <hr />
-                            <p className='p'>Email: {this.state.owner.email}</p>
-                            <p className='p'>Telefono: {this.state.owner.phone}</p>
-                           
 
+                            <p className='p'>Email: {this.state.owner &&this.state.owner.email}</p>
+                            <p className='p'>Telefono: {this.state.owner &&this.state.owner.phone}</p>
                             <p className='p'>Estado: {this.state.state}</p>
                             <p className='p'>Precio: {this.state.price}$</p>
-                            {this.props.loggedIn.name === this.state.owner.name ? <Button style={{ marginRight: 20 }} onClick={() => this.handleModal(true)} variant="light" size="sm">Actualizar</Button> : null}
-                            {this.props.loggedIn.name === this.state.owner.name ? <Button onClick={() => this.delete()} variant="light" size="sm">Eliminar</Button> : null}
+
+                            {this.state.owner &&this.props.loggedIn.name === this.state.owner.name ? <Button style={{ marginRight: 20 }} onClick={() => this.handleModal(true)} variant="light" size="sm">Actualizar</Button> : null}
+                            {this.state.owner &&this.props.loggedIn.name === this.state.owner.name ? <Button onClick={() => this.delete()} variant="light" size="sm">Eliminar</Button> : null}
                             <hr />
 
-                            <Modal style={{ marginTop: 100}} show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                            <Modal style={{ marginTop: 30 }} show={this.state.showModal} onHide={() => this.handleModal(false)}>
                                 <Modal.Header closeButton>
                                     <Modal.Title >Actualizar datos</Modal.Title>
                                 </Modal.Header>
@@ -108,6 +134,8 @@ class GuitarDetails extends Component {
                         </Col>
                     </Row>
                 </main>
+                {this.state.showToastGuitar ? <Message text='Tu guitarra ha sido actualizada' /> : null}
+
             </Container>
         )
     }

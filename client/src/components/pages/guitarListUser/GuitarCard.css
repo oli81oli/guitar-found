@@ -6,7 +6,15 @@
 .guitar-card img {
   margin-top: 1em;
   height: 600px;
+  padding:20px;
   object-fit: cover;
+}
+.center-spinner2{
+  margin:0 auto;
+  
+}
+.text-header{
+  color:white
 }
 .text-card{
   

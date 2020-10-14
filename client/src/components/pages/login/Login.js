@@ -15,7 +15,8 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-           
+            message: ''
+
         }
         this.authUserService = new authUserService()
     }
@@ -25,7 +26,7 @@ class Login extends Component {
         const { name, value } = e.target
         this.setState({ [name]: value })
     }
-    
+
 
     handleFormSubmit = e => {
         e.preventDefault()
@@ -36,7 +37,7 @@ class Login extends Component {
                 this.props.takeUser(response.data)
                 this.props.history.push('/profile')
             })
-            .catch(err => console.log('Err:', { err }))
+            .catch(err => this.setState({ message: err.request.response }))
     }
 
 
@@ -45,21 +46,21 @@ class Login extends Component {
         return (
             <>
                 <section>
-                    <h1 style={{ color: 'rgb(169,169,169)' }} >Inicio de Sesion</h1>
-                    <Form style={{ color: 'rgb(169,169,169)' }} onSubmit={this.handleFormSubmit}>
+                    <Form className='config-form' onSubmit={this.handleFormSubmit}>
+                        <h1>Inicio de Sesion</h1>
 
                         <Form.Group >
                             <Form.Label>Nombre de Usuario</Form.Label>
-                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder='Indica tu Usuario'/>
+                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder='Indica tu Usuario' />
                         </Form.Group>
 
                         <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder='Indica tu Contraseña'/>
+                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder='Indica tu Contraseña' />
                         </Form.Group>
 
-
-                        <Button  style={{marginTop:20}}variant="light" size="sm" type="submit">Entrar</Button>
+                        <p style={{ color: 'red' }}>{this.state.message}</p>
+                        <Button style={{ marginTop: 20 }} variant="light" size="sm" type="submit">Entrar</Button>
                     </Form>
                 </section>
             </>

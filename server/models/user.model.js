@@ -8,11 +8,12 @@ const userSchema = new Schema({
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -23,8 +24,16 @@ const userSchema = new Schema({
             },
             message: ` is not a valid email!`
         },
-
     },
+    favGuitars: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Guitar'
+    }],
+
+    createdGuitars: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Guitar'
+    }],
     phone: Number
 }, {
     timestamps: true

@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+
+
 import UpdateUserForm from './UpdateUserForm'
 import NewGuitarForm from '../newGuitar/NewGuitarForm'
+import Message from '../../shared/Message'
 
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+
 
 import './Profile.css'
 
 import authUserService from '../../../service/auth.userService'
+import guitarService from './../../../service/guitar.service'
+
 
 
 
@@ -18,15 +27,19 @@ class Profile extends Component {
         super(props)
         this.state = {
             name: this.props.loggedIn.name,
-            username: this.props.loggedIn.username,
             email: this.props.loggedIn.email,
             phone: this.props.loggedIn.phone,
 
             showModal: false,
-            showModalGuitar: false
+            showModalGuitar: false,
+            showToastUser: false,
+            showToastGuitar: false,
+
         }
 
         this.authUserService = new authUserService()
+        this.guitarService = new guitarService()
+
 
     }
 
@@ -34,9 +47,9 @@ class Profile extends Component {
 
         this.setState({
             name: updatedUser.name,
-            username: updatedUser.username,
             email: updatedUser.email,
-            phone: updatedUser.phone
+            phone: updatedUser.phone,
+            showToastUser: true
         })
         this.handleModalUser(false)
     }
@@ -45,11 +58,15 @@ class Profile extends Component {
     handleModalUser = showModal => this.setState({ showModal })
 
 
-    
-    handleGuitar = () => this.handleModalNewGuitar(false)
+
+    handleGuitar = () => {
+        this.setState({ showToastGuitar: true })
+        this.handleModalNewGuitar(false)
+    }
     handleModalNewGuitar = showModalGuitar => this.setState({ showModalGuitar })
 
 
+    
 
     delete = () => {
         this.authUserService
@@ -57,35 +74,65 @@ class Profile extends Component {
             .then(() => {
                 this.props.takeUser(null)
                 this.props.history.push('/')
+                this.props.message(false)
             })
             .catch(err => console.log(err))
 
     }
 
 
+
     render() {
 
         return (
             <>
+               
                 <div className='profile'>
 
-                    <h2>Hola! {this.state.name}
-                        <Button onClick={() => this.handleModalUser(true)} className='config-btn' size="sm" variant="light" >Actualizar Datos</Button >
-                        <Button onClick={() => this.delete()} className='config-btn' size="sm" variant="light" >Dar de Baja</Button >
-                    </h2>
-
+                    <h1>Hola!, {this.state.name} </h1>
 
                     <div className='flexBox'>
                         <p>{this.state.email}</p>
-                        <p>{this.state.username}</p>
+                        <p>{this.props.loggedIn.username}</p>
                         <p>{this.state.phone}</p>
                     </div>
                     <hr />
+                    <Container>
+                        <Row>
+                            <Col sm={6} lg={3}>
+                                <Link to="/profile/favs" >
+                                    <div className='profile-btn'>
+                                        <Button style={{ width: '80%' }} className='config-btn' size="sm" variant="light" >Mis Guitarras Favoritas</Button >
+                                    </div>
+                                </Link>
 
+                            </Col>
+
+                            <Col sm={6} lg={3}>
+                                <Link to="/profile/myGuitars">
+                                <div className='profile-btn'>
+                                    <Button style={{ width: '80%' }} className='config-btn' size="sm" variant="light" >Mis Guitarras Publicadas</Button >
+                                </div>
+                                </Link>
+                            </Col>
+                            <Col sm={6} lg={3}>
+                                <div className='profile-btn'>
+                                    <Button style={{ width: '80%' }} onClick={() => this.handleModalUser(true)} className='config-btn' size="sm" variant="light" >Actualizar tus Datos</Button >
+                                </div>
+                            </Col>
+
+                            <Col sm={6} lg={3}>
+                                <div className='profile-btn'>
+                                    <Button style={{ width: '80%' }} onClick={() => this.delete()} className='config-btn' size="sm" variant="light" >Darse de Baja</Button >
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
 
 
-                <Modal style={{marginTop:100}}show={this.state.showModal} onHide={() => this.handleModalUser(false)}>
+
+                <Modal style={{ marginTop: 30 }} show={this.state.showModal} onHide={() => this.handleModalUser(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title >Actualizar datos</Modal.Title>
                     </Modal.Header>
@@ -93,7 +140,6 @@ class Profile extends Component {
                         <UpdateUserForm loggedIn={this.props.loggedIn} closeModal={this.handleUser} />
                     </Modal.Body>
                 </Modal>
-
 
 
                 <Link to='/profile/guitars'>
@@ -106,7 +152,7 @@ class Profile extends Component {
 
 
 
-                <Modal style={{marginTop:100}} show={this.state.showModalGuitar} onHide={() => this.handleModalNewGuitar(false)}>
+                <Modal style={{ marginTop: 30 }} show={this.state.showModalGuitar} onHide={() => this.handleModalNewGuitar(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title >Anuncia tu guitarra</Modal.Title>
                     </Modal.Header>
@@ -114,6 +160,9 @@ class Profile extends Component {
                         <NewGuitarForm loggedIn={this.props.loggedIn} closeModalGuitar={this.handleGuitar} />
                     </Modal.Body>
                 </Modal>
+
+                {this.state.showToastGuitar ? <Message text='Tu guitarra ha sido publicada' /> : null}
+                {this.state.showToastUser ? <Message text='Tus datos han sido actualizados' /> : null}
             </>
         )
     }

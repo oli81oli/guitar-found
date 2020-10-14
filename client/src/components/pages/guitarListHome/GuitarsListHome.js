@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
-import Button from 'react-bootstrap/Button'
+
 
 import './GuitarsListHome.css'
 
@@ -43,9 +43,9 @@ class GuitarsListHome extends Component {
             <>
                 {this.state.guitars.length ?
                     this.state.guitars.slice(0, 8).map(elm =>
-                        <Col style={{ marginTop: '10em' }} key={elm._id} xl={3} lg={6}>
+                        <Col style={{ marginBottom: '5em' }} key={elm._id} xl={3} lg={6}>
                             <div>
-                                <h2>{elm.name}</h2>
+                                <h2 className='h2'>{elm.name}</h2>
 
                                 <figure>
                                     <img className='width-img' src={elm.image} alt='guitar' />
@@ -54,7 +54,7 @@ class GuitarsListHome extends Component {
                         </Col>)
                     : <div className='center-spinner'><Spinner animation="border" variant='light' /></div>}
 
-                <Button className='center-btn' onClick={this.props.hideGuitars} variant="light" size="sm">Cerrar </Button>
+                {/* <Button className='center-btn' onClick={this.props.hideGuitars} variant="light" size="sm">Cerrar </Button> */}
             </>
         )
     }

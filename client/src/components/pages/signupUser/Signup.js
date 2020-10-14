@@ -7,6 +7,7 @@ import './Signup.css'
 
 import authUserService from '../../../service/auth.userService'
 
+
 class Signup extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +16,7 @@ class Signup extends Component {
             username: '',
             password: '',
             email: '',
-            phone: null,
+            phone: 0,
             message: ''
         }
         this.authUserService = new authUserService()
@@ -36,6 +37,7 @@ class Signup extends Component {
                 this.props.history.push('/login')
             })
             .catch(err => this.setState({ message: err.request.response }))
+            
     }
 
 
@@ -44,8 +46,8 @@ class Signup extends Component {
         return (
             <>
                 <section>
-                    <h1 style={{ color: 'rgb(169,169,169)' }} >Registro de usuario</h1>
-                    <Form style={{ color: 'rgb(169,169,169)' }} onSubmit={this.handleFormSubmit}>
+                    <Form className='config-form' onSubmit={this.handleFormSubmit}>
+                        <h1>Registro de usuario</h1>
 
                         <Form.Group >
                             <Form.Label >Nombre</Form.Label>
@@ -54,27 +56,27 @@ class Signup extends Component {
 
                         <Form.Group >
                             <Form.Label>Nombre de Usuario</Form.Label>
-                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange}placeholder='Indica tu Usuario' />
+                            <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder='Indica tu Usuario' />
                         </Form.Group>
 
                         <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder='Indica tu contraseña'/>
+                            <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} placeholder='Indica tu contraseña' />
                         </Form.Group>
 
                         <Form.Group >
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder='Indica tu email'/>
+                            <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder='Indica tu email' />
                         </Form.Group>
 
                         <Form.Group >
                             <Form.Label >Telefono</Form.Label>
-                            <Form.Control type="number" name="phone" value={this.state.phone} onChange={this.handleInputChange}placeholder='Indica tu nº de telefono' />
+                            <Form.Control type="number" name="phone" value={this.state.phone} onChange={this.handleInputChange} placeholder='Indica tu nº de telefono' />
                         </Form.Group>
 
-                        <p style={{color:'red'}}>{this.state.message}</p>
-                        
-                        <Button  style={{marginTop:20}}variant="light" size="sm" type="submit">Registrar</Button>
+                        <p style={{ color: 'red' }}>{this.state.message}</p>
+
+                        <Button style={{ marginTop: 20 }} variant="light" size="sm" type="submit">Registrar</Button>
                     </Form>
                 </section>
             </>
