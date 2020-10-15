@@ -84,7 +84,7 @@ class GuitarDetails extends Component {
             state: updatedGuitar.state,
             price: updatedGuitar.price,
             image: updatedGuitar.image,
-            showToastGuitar: null
+            showToastGuitar: true
         })
         this.handleModalGuitar(false)
 
@@ -94,10 +94,10 @@ class GuitarDetails extends Component {
 
 
     handleModalGuitar = () => {
-        this.setState({ showToastGuitar: null })
+        this.setState({ showToastGuitar: true })
         this.handleModal(false)
     }
-    handleModal = showModal => this.setState({ showModal, showToastGuitar: true })
+    handleModal = showModal => this.setState({ showModal})
 
 
 

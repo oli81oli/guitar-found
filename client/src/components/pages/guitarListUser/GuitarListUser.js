@@ -55,11 +55,11 @@ class GuitarListUser extends Component {
 
     }
     handleInputState = e => {
-        this.setState({ stateFilter: e.target.value }, () => this.filterSearch())
+        this.setState({ stateFilter: e.target.value }, () => this.filterSearch1())
 
     }
     handleInputPrice = e => {
-        this.setState({ priceFilter: e.target.value }, () => this.filterSearch1())
+        this.setState({ priceFilter: e.target.value }, () => this.filterSearch2())
 
     }
 
@@ -78,11 +78,18 @@ class GuitarListUser extends Component {
 
         const guitarsToShow = this.state.filteredGuitars
             .filter(guitar => guitar.name.includes(this.state.nameFilter))
+
+        this.setState({ filteredGuitars: guitarsToShow })
+    }
+
+    filterSearch1 = () => {
+
+        const guitarsToShow = this.state.filteredGuitars
             .filter(guitar => guitar.state === this.state.stateFilter)
 
         this.setState({ filteredGuitars: guitarsToShow })
     }
-    filterSearch1 = () => {
+    filterSearch2 = () => {
 
         const guitarsToShow = this.state.filteredGuitars
             .filter(guitar => guitar.price <= this.state.priceFilter)
@@ -148,8 +155,8 @@ class GuitarListUser extends Component {
                                         <option value=''>Elija una opcion</option>
                                         <option value='250'>Menos de 250 $</option>
                                         <option value='550'>Menos de 550 $</option>
-                                        <option value='750'>Menos de 1000 $</option>
-                                        <option value='1000'>Menos de 2000 $</option>
+                                        <option value='1000'>Menos de 1000 $</option>
+                                        <option value='2000'>Menos de 2000 $</option>
                                        
 
 
