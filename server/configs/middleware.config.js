@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
 
-const whitelist = ["https://guitar-found-client.herokuapp.com ", process.env.DOMAIN_LOCAL]
+const whitelist = ["https://guitar-found-client.herokuapp.com", process.env.DOMAIN_REMOTE, process.env.DOMAIN_LOCAL]
 const corsOptions = {
     origin: (origin, cb) => {
         const originIsWhitelisted = whitelist.includes(origin)
