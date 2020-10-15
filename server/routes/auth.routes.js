@@ -191,6 +191,24 @@ router.post('/add-favourites', (req, res) => {
 })
 
 
+//REMOVE FAVOURITES
+
+router.patch('/delete-favourites', (req, res) => {
+    const { user, guitar } = req.body
+
+    User.findById(user)
+        .then((response) => {
+            const { favGuitars } = response
+            const filteredGuitars = favGuitars.filter((guitarId) => guitarId.toString() !== guitar)
+
+            return User.findByIdAndUpdate(user, { favGuitars: filteredGuitars }, { new: true })
+                .populate('favGuitars')
+        })
+        .then(response => res.json(response.favGuitars))
+        .catch(err => res.status(500).json(err))
+})
+
+
 
 //FIND USER
 router.get('/find/:id', (req, res) => {

@@ -52,6 +52,7 @@ class GuitarDetails extends Component {
             .catch(err => this.setState({ message: err.response.data.message }))
     }
 
+
     addFavourites = e => {
 
         e.preventDefault()
@@ -61,8 +62,17 @@ class GuitarDetails extends Component {
             .addFavouritesUser(guitar)
             .then(() => this.props.history.push('/profile'))
             .catch(err => this.setState({ message: err.response.data.message }))
+    }
 
 
+    removeFromFavorites = () => {
+
+        const guitar = { user: this.props.loggedIn._id, guitar: this.props.match.params._id }
+       
+        this.authUserService
+            .deleteFavouriteGuitar(guitar)
+            .then(() => this.props.history.push('/profile'))
+            .catch(err => this.setState({ message: err.request.response }))
     }
 
 
@@ -104,9 +114,8 @@ class GuitarDetails extends Component {
                     </Link>
                     <h1 className='h1'>{this.state.name} {this.state.model}</h1>
                     <hr style={{ border: '1px solid white' }} />
-                    <Button style={{ margin: '50px 0' }} onClick={this.addFavourites}
-                        variant="light" size="sm">Añadir a Favoritos</Button>
-
+                    <Button style={{ margin: '30px 0' }} onClick={this.addFavourites} variant="light" size="sm">Añadir a Favoritos</Button>
+                    <Button style={{ margin:  '0 10px' }}onClick={this.removeFromFavorites} variant="light" size="sm">Quitar de Favoritos</Button>
                     <Row>
                         <Col md={4}>
 

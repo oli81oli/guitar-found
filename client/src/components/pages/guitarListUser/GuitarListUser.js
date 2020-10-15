@@ -149,8 +149,8 @@ class GuitarListUser extends Component {
                                         <option value='250'>Menos de 250 $</option>
                                         <option value='550'>Menos de 550 $</option>
                                         <option value='750'>Menos de 1000 $</option>
-                                        <option value='1000'>Menos de 5000 $</option>
-                                        <option value='5000'>Menos de 10000 $</option>
+                                        <option value='1000'>Menos de 2000 $</option>
+                                       
 
 
                                     </Form.Control>

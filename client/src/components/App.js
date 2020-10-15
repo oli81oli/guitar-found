@@ -59,12 +59,11 @@ class App extends Component {
           <Route path="/" exact render={() => <Home sendMessage={this.state.stateMessage} />} />
           <Route path="/signup" render={props => <Signup takeUser={this.takeUser} {...props} />} />
           <Route path="/login" render={props => <Login takeUser={this.takeUser} {...props} />} />
-          <Route path="/profile" exact render={props => this.state.loggedIn ? <Profile takeUser={this.takeUser} message={this.message} loggedIn={this.state.loggedIn} {...props} /> : null} />
-          {/* Redirect arriba */}
-          <Route path="/profile/guitars" exact render={() => this.state.loggedIn ? <GuitarListUser loggedIn={this.state.loggedIn} /> : null} />
-          <Route path="/profile/guitars/details/:_id" exact render={props => this.state.loggedIn ? <GuitarDetails loggedIn={this.state.loggedIn} {...props} /> : null} />
-          <Route path="/profile/favs" render={() => this.state.loggedIn ? <GuitarFavs loggedIn={this.state.loggedIn} /> : null} />
-          <Route path="/profile/myGuitars" render={() => this.state.loggedIn ? <MyGuitars loggedIn={this.state.loggedIn} /> : null} />
+          <Route path="/profile" exact render={props => this.state.loggedIn ? <Profile takeUser={this.takeUser} message={this.message} loggedIn={this.state.loggedIn} {...props} /> : <Redirect to="/login" />} />
+          <Route path="/profile/guitars" exact render={() => this.state.loggedIn ? <GuitarListUser loggedIn={this.state.loggedIn} /> : <Redirect to="/login" />} />
+          <Route path="/profile/guitars/details/:_id" exact render={props => this.state.loggedIn ? <GuitarDetails loggedIn={this.state.loggedIn} {...props} /> : <Redirect to="/login" />} />
+          <Route path="/profile/favs" render={() => this.state.loggedIn ? <GuitarFavs loggedIn={this.state.loggedIn} /> : <Redirect to="/login" />} />
+          <Route path="/profile/myGuitars" render={() => this.state.loggedIn ? <MyGuitars loggedIn={this.state.loggedIn} /> : <Redirect to="/login" />} />
         </Switch>
         {this.state.loggedIn && <Message text={`Bienvend@, ${this.state.loggedIn.name} a GuitarFound`} />}
 
@@ -75,5 +74,3 @@ class App extends Component {
 }
 
 export default App
-// this.state.loggedIn?
-{/* <Redirect to="/login" /> */ }
