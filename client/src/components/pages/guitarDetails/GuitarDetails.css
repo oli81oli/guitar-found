@@ -13,10 +13,18 @@
 .image-detail{
     width: 70%;
     display:block;
-    margin:1em auto
+    margin:-5em auto
 }
 .config-modal-update{
     background-color: black;
     border:1px solid white;
     border-radius:5px
 }
+
+@media (max-width: 768px) {
+    .image-detail{
+       
+        margin:1em auto
+    }
+  }
+  

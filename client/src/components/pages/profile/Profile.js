@@ -13,12 +13,9 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-
 import './Profile.css'
 
 import authUserService from '../../../service/auth.userService'
-import guitarService from './../../../service/guitar.service'
-
 
 
 
@@ -38,7 +35,7 @@ class Profile extends Component {
         }
 
         this.authUserService = new authUserService()
-        this.guitarService = new guitarService()
+       
 
 
     }
@@ -76,7 +73,7 @@ class Profile extends Component {
                 this.props.history.push('/')
                 this.props.message(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => this.setState({ message: err.response.data.message }))
 
     }
 

@@ -7,10 +7,11 @@ import Button from 'react-bootstrap/Button'
 
 import GuitarCard from '../guitarListUser/GuitarCard'
 
+
 import './MyGuitars.css'
 
 
-import authUserService from './../../../service/auth.userService'
+
 import guitarService from '../../../service/guitar.service'
 
 
@@ -22,10 +23,11 @@ class MyGuitars extends Component {
         super(props)
         this.state = {
             guitars: [],
-            created: []
+            created: [],
+            message: ''
         }
 
-        this.authUserService = new authUserService()
+        
         this.guitarService = new guitarService()
     }
 
@@ -36,6 +38,7 @@ class MyGuitars extends Component {
         this.guitarService
             .getAllGuitars()
             .then(response => this.setState({ guitars: response.data }))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 
@@ -53,12 +56,14 @@ class MyGuitars extends Component {
                         <Button style={{ marginBottom: 40 }} variant="light" size="sm">Volver</Button>
                     </Link>
                 </div>
+                <p style={{ color: 'red' }}>{this.state.message}</p>
+
 
                 <h2 className='text-h2'>Haz Click para ver las Guitarras que has publicado</h2>
-                    <Button className='btn-created' onClick={() => this.show()} style={{ marginBottom: 40 }} variant="light" size="lg">Mostrar</Button>
+                <Button className='btn-created' onClick={() => this.show()} style={{ marginBottom: 40 }} variant="light" size="lg">Mostrar</Button>
 
                 <Row>
-                    {this.state.created.map(elm => <GuitarCard key={elm._id}  {...elm}   />)}
+                    {this.state.created.map(elm => <GuitarCard key={elm._id}  {...elm} />)}
                 </Row>
             </>
         )

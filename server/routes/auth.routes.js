@@ -4,6 +4,8 @@ const passport = require("passport")
 const bcrypt = require("bcrypt")
 const mongoose = require('mongoose')
 const User = require("../models/user.model")
+const Guitar = require("../models/guitar.model")
+
 
 
 
@@ -165,7 +167,8 @@ router.put('/update-user/:user_id', (req, res) => {
 
 router.get('/delete-user/:user_id', (req, res) => {
 
-    User.findByIdAndDelete(req.params.user_id)
+    Guitar.deleteMany({ owner: mongoose.Types.ObjectId(req.params.user_id) })
+        .then(() => User.findByIdAndDelete(req.params.user_id))
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -183,17 +186,6 @@ router.post('/add-favourites', (req, res) => {
 
     User.findByIdAndUpdate(user, { $push: { favGuitars: guitar } }, { new: true })
         .populate('favGuitars')
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-})
-
-router.post('/add-createdBy', (req, res) => {
-
-
-    const { user, guitar } = req.body
-
-    User.findByIdAndUpdate(user, { $push: { createdGuitars: guitar } }, { new: true })
-        .populate('createdGuitars')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -42,7 +42,7 @@ class NewGuitarForm extends Component {
         this.guitarService
             .createNewGuitar(this.state.guitar)
             .then(() => this.props.closeModalGuitar())
-            .catch(err => this.setState({ message: err.request.response }))
+            .catch(err => this.setState({ message: err.response.data.message }))
 
     }
 
@@ -64,7 +64,7 @@ class NewGuitarForm extends Component {
                     uploadingImage: null
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 

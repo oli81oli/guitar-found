@@ -33,7 +33,7 @@ class UpdateUserForm extends Component {
         this.authUserService
             .updateUser(this.props.loggedIn._id, this.state)
             .then(response => this.props.closeModal(response.data))
-            .catch(err => this.setState({ message: err.request.response }))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 

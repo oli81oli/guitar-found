@@ -44,7 +44,7 @@ class UpdateGuitarForm extends Component {
         this.guitarService
             .editGuitar(this.props.guitarData._id, this.state.guitar)
             .then(response => this.props.handleGuitar(response.data))
-            .catch(err => this.setState({ message: err.request.response }))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 
@@ -64,7 +64,7 @@ class UpdateGuitarForm extends Component {
                     uploadingImage: null
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => this.setState({ message: err.response.data.message }))
 
     }
 

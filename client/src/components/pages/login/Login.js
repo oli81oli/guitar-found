@@ -37,7 +37,7 @@ class Login extends Component {
                 this.props.takeUser(response.data)
                 this.props.history.push('/profile')
             })
-            .catch(err => this.setState({ message: err.request.response }))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 
@@ -62,6 +62,7 @@ class Login extends Component {
                         <p style={{ color: 'red' }}>{this.state.message}</p>
                         <Button style={{ marginTop: 20 }} variant="light" size="sm" type="submit">Entrar</Button>
                     </Form>
+
                 </section>
             </>
         )

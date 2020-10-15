@@ -7,7 +7,7 @@ const guitarSchema = new Schema({
     model: String,
     image: {
         type: String,
-        default: 'https://res.cloudinary.com/dpflfpgcj/image/upload/v1602174225/Home/logo.png.png'
+        default: 'https://res.cloudinary.com/dpflfpgcj/image/upload/v1602170825/zwfbadfhd2zp8pryso0a.png'
     },
     state: {
         type: String,

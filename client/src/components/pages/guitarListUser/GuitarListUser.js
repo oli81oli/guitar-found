@@ -28,7 +28,9 @@ class GuitarListUser extends Component {
 
             nameFilter: '',
             priceFilter: '',
-            stateFilter: ''
+            stateFilter: '',
+
+            message: ''
 
 
         }
@@ -42,7 +44,7 @@ class GuitarListUser extends Component {
         this.guitarService
             .getAllGuitars()
             .then(response => this.setState({ guitars: response.data, filteredGuitars: response.data }))
-            .catch(err => console.log('------', err))
+            .catch(err => this.setState({ message: err.response.data.message }))
 
     }
 
@@ -76,7 +78,7 @@ class GuitarListUser extends Component {
 
         const guitarsToShow = this.state.filteredGuitars
             .filter(guitar => guitar.name.includes(this.state.nameFilter))
-            .filter(guitar => guitar.state.includes(this.state.stateFilter))
+            .filter(guitar => guitar.state === this.state.stateFilter)
 
         this.setState({ filteredGuitars: guitarsToShow })
     }
@@ -107,6 +109,7 @@ class GuitarListUser extends Component {
                     </Row>
                 </Container>
 
+                <p style={{ color: 'red' }}>{this.state.message}</p>
 
                 <Container>
                     <h2 className='text-header'>Personaliza tu Busqueda</h2>
@@ -145,9 +148,9 @@ class GuitarListUser extends Component {
                                         <option value=''>Elija una opcion</option>
                                         <option value='250'>Menos de 250 $</option>
                                         <option value='550'>Menos de 550 $</option>
-                                        <option value='1000'>Menos de 1000 $</option>
-                                        <option value='5000'>Menos de 5000 $</option>
-                                        <option value='10000'>Menos de 10000 $</option>
+                                        <option value='750'>Menos de 1000 $</option>
+                                        <option value='1000'>Menos de 5000 $</option>
+                                        <option value='5000'>Menos de 10000 $</option>
 
 
                                     </Form.Control>

@@ -22,7 +22,7 @@ class NavBar extends Component {
         this.authUserService
             .logout()
             .then(() => this.props.takeUser(null))
-            .catch(err => console.log(err))
+            .catch(err => err)
     }
 
 

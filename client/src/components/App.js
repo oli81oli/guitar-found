@@ -66,8 +66,9 @@ class App extends Component {
           <Route path="/profile/favs" render={() => this.state.loggedIn ? <GuitarFavs loggedIn={this.state.loggedIn} /> : null} />
           <Route path="/profile/myGuitars" render={() => this.state.loggedIn ? <MyGuitars loggedIn={this.state.loggedIn} /> : null} />
         </Switch>
-        <Footer />
         {this.state.loggedIn && <Message text={`Bienvend@, ${this.state.loggedIn.name} a GuitarFound`} />}
+
+        <Footer />
       </>
     )
   }

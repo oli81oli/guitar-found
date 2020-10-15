@@ -16,6 +16,7 @@ class GuitarsListHome extends Component {
         super(props)
         this.state = {
             guitars: [],
+            message: ''
 
         }
         this.guitarService = new guitarService()
@@ -24,7 +25,7 @@ class GuitarsListHome extends Component {
 
     componentDidMount = () => this.loadGuitars()
 
-    
+
     loadGuitars = () => {
         this.guitarService
             .getAllGuitars()
@@ -32,7 +33,7 @@ class GuitarsListHome extends Component {
                 const random = response.data.sort(() => .5 - Math.random())
                 this.setState({ guitars: random })
             })
-            .catch(err => console.log('Error:', err))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 
@@ -41,6 +42,8 @@ class GuitarsListHome extends Component {
 
         return (
             <>
+                <p style={{ color: 'red' }}>{this.state.message}</p>
+
                 {this.state.guitars.length ?
                     this.state.guitars.slice(0, 8).map(elm =>
                         <Col style={{ marginBottom: '5em' }} key={elm._id} xl={3} lg={6}>
@@ -54,7 +57,7 @@ class GuitarsListHome extends Component {
                         </Col>)
                     : <div className='center-spinner'><Spinner animation="border" variant='light' /></div>}
 
-                {/* <Button className='center-btn' onClick={this.props.hideGuitars} variant="light" size="sm">Cerrar </Button> */}
+
             </>
         )
     }

@@ -14,5 +14,7 @@ class GuitarService {
     createNewGuitar = guitar => this.api.post('/newGuitar', guitar)
     editGuitar = (id, guitar) => this.api.put(`/editGuitar/${id}`, guitar)
     deleteGuitar = id => this.api.get(`/delete-guitar/${id}`)
+    
+
 }
 export default GuitarService

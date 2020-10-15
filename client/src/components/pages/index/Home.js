@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import GuitarListHome from '../guitarListHome/GuitarsListHome'
 import Row from 'react-bootstrap/Row'
@@ -9,32 +9,21 @@ import './Home.css'
 import Message from '../../shared/Message'
 
 
-class Home extends Component {
+const Home = props => {
 
-    constructor() {
-        super()
-        this.state = {
-            showGuitar: true
-        }
-    }
 
-   
-    showGuitars = () => <Row style={{ margin: '0 2em' }}><GuitarListHome hideGuitars={this.hideGuitars} /></Row>
 
-    render() {
+    return (
+        <main id='main-page' >
+            <h1>GuitarFound</h1>
 
-        return (
-            <main id='main-page' >
-                <h1>GuitarFound</h1>
+            <div>
+                <Row style={{ margin: '0 2em' }}><GuitarListHome /></Row>
+            </div >
+            {props.sendMessage === false ? <Message text='Usuario dado de baja satisfactoriamente' /> : null}
+        </main >
+    )
 
-                <div>
-                                        
-                    {this.state.showGuitar ? this.showGuitars() : null}
-                </div >
-                {this.props.sendMessage === false ? <Message text='Usuario dado de baja satisfactoriamente' /> : null}
-            </main >
-        )
-    }
 }
 
 export default Home

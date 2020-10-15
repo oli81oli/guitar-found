@@ -34,9 +34,9 @@ class Signup extends Component {
             .signup(this.state)
             .then(response => {
                 this.props.takeUser(response.data)
-                this.props.history.push('/login')
+                this.props.history.push('/profile')
             })
-            .catch(err => this.setState({ message: err.request.response }))
+            .catch(err => this.setState({ message: err.response.data.message }))
             
     }
 

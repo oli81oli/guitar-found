@@ -27,7 +27,8 @@ class GuitarDetails extends Component {
             owner: {},
 
             showModal: false,
-            showToastGuitar: false
+            showToastGuitar: false,
+            message: ''
         }
         this.guitarService = new guitarService()
         this.authUserService = new authUserService()
@@ -39,7 +40,7 @@ class GuitarDetails extends Component {
         this.guitarService
             .getOneGuitar(this.props.match.params._id)
             .then(response => this.setState(response.data))
-            .catch(err => console.log('Error:', err))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
 
@@ -48,7 +49,7 @@ class GuitarDetails extends Component {
         this.guitarService
             .deleteGuitar(this.props.match.params._id)
             .then(() => this.props.history.push('/profile'))
-            .catch(err => console.log(err))
+            .catch(err => this.setState({ message: err.response.data.message }))
     }
 
     addFavourites = e => {
@@ -59,7 +60,7 @@ class GuitarDetails extends Component {
         this.authUserService
             .addFavouritesUser(guitar)
             .then(() => this.props.history.push('/profile'))
-            .catch(err => console.log(err))
+            .catch(err => this.setState({ message: err.response.data.message }))
 
 
     }
@@ -96,27 +97,29 @@ class GuitarDetails extends Component {
         return (
             <Container>
                 <main id='details'>
+                    <p style={{ color: 'red' }}>{this.state.message}</p>
                     <Link to="/profile/" >
                         <Button style={{ marginBottom: '5% ' }} variant="light" size="sm">Volver al Perfil</Button>
 
                     </Link>
                     <h1 className='h1'>{this.state.name} {this.state.model}</h1>
                     <hr style={{ border: '1px solid white' }} />
-                    <Button onClick={this.addFavourites}
+                    <Button style={{ margin: '50px 0' }} onClick={this.addFavourites}
                         variant="light" size="sm">Añadir a Favoritos</Button>
+
                     <Row>
                         <Col md={4}>
 
-                            <h2 className='owner'>Propietario: {this.state.owner && this.state.owner.name}</h2>
+                            <h2 className='owner'>Propietario: {this.state.owner ? this.state.owner.name : 'No existe'}</h2>
                             <hr />
 
-                            <p className='p'>Email: {this.state.owner &&this.state.owner.email}</p>
-                            <p className='p'>Telefono: {this.state.owner &&this.state.owner.phone}</p>
+                            <p className='p'>Email: {this.state.owner ? this.state.owner.email : 'No existe'}</p>
+                            <p className='p'>Telefono: {this.state.owner ? this.state.owner.phone : 'No existe'}</p>
                             <p className='p'>Estado: {this.state.state}</p>
                             <p className='p'>Precio: {this.state.price}$</p>
 
-                            {this.state.owner &&this.props.loggedIn.name === this.state.owner.name ? <Button style={{ marginRight: 20 }} onClick={() => this.handleModal(true)} variant="light" size="sm">Actualizar</Button> : null}
-                            {this.state.owner &&this.props.loggedIn.name === this.state.owner.name ? <Button onClick={() => this.delete()} variant="light" size="sm">Eliminar</Button> : null}
+                            {this.state.owner && this.props.loggedIn.name === this.state.owner.name ? <Button style={{ marginRight: 20 }} onClick={() => this.handleModal(true)} variant="light" size="sm">Actualizar</Button> : null}
+                            {this.state.owner && this.props.loggedIn.name === this.state.owner.name ? <Button onClick={() => this.delete()} variant="light" size="sm">Eliminar</Button> : null}
                             <hr />
 
                             <Modal style={{ marginTop: 30 }} show={this.state.showModal} onHide={() => this.handleModal(false)}>
